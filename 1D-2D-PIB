@@ -1,0 +1,49 @@
+#taking code from this tutorial https://matplotlib.org/gallery/lines_bars_and_markers/eventcollection_demo.html#sphx-glr-gallery-lines-bars-and-markers-eventcollection-demo-py
+
+
+import matplotlib.pyplot as plt
+from matplotlib.collections import EventCollection
+import numpy as np
+
+
+
+x = np.arange(0,100,0.1)
+
+
+
+Lx = 1
+nx = 1
+#1D PIB
+y = (2/Lx)**(1/2)*np.sin((nx*np.pi*x)/Lx)
+#2D PIB
+ydata2 = 1 - x ** 3
+
+# plot the data
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.plot(xdata1, ydata1, 'r', xdata2, ydata2, 'b')
+
+# create the events marking the x data points
+xevents1 = EventCollection(xdata1, color=[1, 0, 0], linelength=0.05)
+xevents2 = EventCollection(xdata2, color=[0, 0, 1], linelength=0.05)
+
+# create the events marking the y data points
+yevents1 = EventCollection(ydata1, color=[1, 0, 0], linelength=0.05,
+                           orientation='vertical')
+yevents2 = EventCollection(ydata2, color=[0, 0, 1], linelength=0.05,
+                           orientation='vertical')
+
+# add the events to the axis
+ax.add_collection(xevents1)
+ax.add_collection(xevents2)
+ax.add_collection(yevents1)
+ax.add_collection(yevents2)
+
+# set the limits
+ax.set_xlim([0, 1])
+ax.set_ylim([0, 1])
+
+ax.set_title('line plot with data points')
+
+# display the plot
+plt.show()
