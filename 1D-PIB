@@ -1,0 +1,59 @@
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar  6 13:14:40 2019
+
+@author: Eli
+"""
+#code modified from this tutorial https://matplotlib.org/gallery/lines_bars_and_markers/eventcollection_demo.html#sphx-glr-gallery-lines-bars-and-markers-eventcollection-demo-py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+#this function creates a separate line plot for each n value
+def PIB_1D(x,n_values,Lx):
+    """plots a 1D PIB given a range of x and n values"""
+    """x and n_values should be an array or list"""
+    """Lx can be any number - determines length of box"""
+    for n in n_values:
+        y = n+(2/Lx)**(1/2)*np.sin((n*np.pi*x)/Lx)
+        fig = plt.figure()
+        ax = fig.add_subplot(1,1,1)
+        ax.set_title('1D PIB wave functions, n =' + str(n))
+        ax.plot(x,y)
+    plt.show()
+    return
+    
+x = np.arange(0,2,0.01)
+n = np.arange(1,6)
+Lx = 2
+
+PIB_1D(x,n,Lx)
+
+#1D PIB wavefunctions for the first three principle quantum numbers (n)
+#each wavefunction has an arbitary integer added for readability of plot
+#1D PIB wavefunctions for the first three principle quantum numbers (n)
+ydata1 = 1+(2/Lx)**(1/2)*np.sin((1*np.pi*x)/Lx)
+ydata2 = 2+(2/Lx)**(1/2)*np.sin((2*np.pi*x)/Lx)
+ydata3 = 3+(2/Lx)**(1/2)*np.sin((3*np.pi*x)/Lx)
+ydata4 = 4+(2/Lx)**(1/2)*np.sin((4*np.pi*x)/Lx)
+ydata5 = 5+(2/Lx)**(1/2)*np.sin((5*np.pi*x)/Lx)
+
+#2D PIB
+#y = (2/(Lx*Ly)**(1/2))*np.sin((nx*np.pi*x)/Lx)*np.sin((ny*np.pi*y)/Ly)
+
+# plot the data
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.plot(x, ydata1, 'r', x, ydata2, 'b', x, ydata3, x, ydata4, x, ydata5)
+
+
+# set the limits
+ax.set_xlim([0, 2])
+ax.set_ylim([0, 7])
+
+ax.set_title('1D PIB wave functions, n = 1,2,3,4,5')
+
+# display the plot
+plt.show()
