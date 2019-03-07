@@ -11,17 +11,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-#this function creates a separate line plot for each n value
+#plots and labels a set of PIB wave functions corresponding to a range of n values
 def PIB_1D(x,n_values,Lx):
     """plots a 1D PIB given a range of x and n values"""
     """x and n_values should be an array or list"""
     """Lx can be any number - determines length of box"""
+    fig, ax = plt.subplots(1, 1)
     for n in n_values:
-        y = n+(2/Lx)**(1/2)*np.sin((n*np.pi*x)/Lx)
-        fig = plt.figure()
-        ax = fig.add_subplot(1,1,1)
-        ax.set_title('1D PIB wave functions, n =' + str(n))
-        ax.plot(x,y)
+        plt.plot(x,n+(2/Lx)**(1/2)*np.sin((n*np.pi*x)/Lx), label='n='+str(n))
+    plt.legend()
     plt.show()
     return
     
