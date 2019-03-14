@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 11 15:20:52 2019
+
+@author: Eli
+"""
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+
+#one way to plot a sphere
+#uses strange matrix math that I don't know how to apply to wave functions
+fig = plt.figure(1)
+ax = fig.add_subplot(111, projection='3d')
+
+u = np.linspace(0, 2 * np.pi, 100)
+v = np.linspace(0, np.pi, 100)
+x = 10 * np.outer(np.cos(u), np.sin(v))
+y = 10 * np.outer(np.sin(u), np.sin(v))
+z = 10 * np.outer(np.ones(np.size(u)), np.cos(v))
+
+#plotting a sphere
+ax.plot_surface(x, y, z, color='b')
+
+
+#another way to plot a 3D surface
+#trying to figure out how to make it a sphere, then trying to use same principles to plot wave function
+fig = plt.figure(2)
+ax = fig.add_subplot(111, projection='3d')
+
+# Create the mesh in polar coordinates and compute corresponding Z.
+r = np.linspace(0, 1.25, 50)
+p = np.linspace(0, 2*np.pi, 50)
+t = np.linspace(0, np.pi, 50) #this would be theta
+R, P = np.meshgrid(r, p)
+P3,T3 = np.meshgrid(p, t)
+Z = (R*np.cos(P))
+
+# Express the mesh in the cartesian system.
+X, Y = R*np.cos(T3)*np.sin(P3), R*np.sin(T3)*np.cos(P3)
+
+# Plot the surface.
+ax.plot_surface(X, Y, Z)
+
+plt.show()
